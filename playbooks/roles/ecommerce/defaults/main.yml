@@ -49,6 +49,9 @@ ECOMMERCE_SOCIAL_AUTH_EDX_OIDC_KEY: 'ecommerce-key'
 ECOMMERCE_SOCIAL_AUTH_EDX_OIDC_SECRET: 'ecommerce-secret'
 
 # NOTE: The contents of the certificates should be set in private configuration
+ecommerce_apple_pay_merchant_certificate_directory: '/edx/etc/ssl'
+ecommerce_apple_pay_merchant_certificate_filename: 'apple_pay_merchant.pem'
+ecommerce_apple_pay_merchant_certificate_path: '{{ ecommerce_apple_pay_merchant_certificate_directory }}/{{ ecommerce_apple_pay_merchant_certificate_filename }}'
 ECOMMERCE_APPLE_PAY_MERCHANT_CERTIFICATE: |
   Your PEM file, containing a public and private key,
   should be set in private configuration. This is how you
