@@ -455,6 +455,39 @@ EDXAPP_LMS_SPLIT_DOC_STORE_CONFIG:
   <<: *edxapp_generic_default_docstore
   read_preference: "{{ EDXAPP_LMS_SPLIT_DOC_STORE_READ_PREFERENCE }}"
 
+edxapp_databases:
+# edxapp's edxapp-migrate scripts and the edxapp_migrate play
+# will ensure that any DB not named read_replica will be migrated
+# for both the lms and cms.
+  read_replica:
+    ENGINE: 'django.db.backends.mysql'
+    NAME: 'edxapp'
+    USER: 'edxapp001'
+    PASSWORD: 'password'
+    HOST: 'localhost'
+    PORT: 3306
+    CONN_MAX_AGE: 0
+    OPTIONS: {}
+  default:
+    ENGINE: 'django.db.backends.mysql'
+    ATOMIC_REQUESTS: True
+    NAME: 'edxapp'
+    USER: 'edxapp001'
+    PASSWORD: 'password'
+    HOST: 'localhost'
+    PORT: 3306
+    CONN_MAX_AGE: 0
+    OPTIONS: {}
+  student_module_history:
+    ENGINE: 'django.db.backends.mysql'
+    NAME: 'edxapp_csmh'
+    USER: 'edxapp001'
+    PASSWORD: 'password'
+    HOST: 'localhost'
+    PORT: 3306
+    CONN_MAX_AGE: 0
+    OPTIONS: {}
+
 generic_cache_config: &default_generic_cache
   BACKEND:  "{{ EDXAPP_CACHE_BACKEND }}"
   KEY_FUNCTION:  'util.memcache.safe_key'
