@@ -49,7 +49,7 @@
     mode: "0600"
   when: item.PROTOCOL == "ssh" and GIT_REPOS is defined
   with_items: "{{ GIT_REPOS }}"
-  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
+  #  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
   tags:
     - install
     - install:code
@@ -66,7 +66,7 @@
   register: code_checkout
   when: item.PROTOCOL == "ssh" and GIT_REPOS is defined
   with_items: "{{ GIT_REPOS }}"
-  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
+  # no_log: "{{ GIT_CLONE_NO_LOGGING }}"
   tags:
     - install
     - install:code
@@ -81,7 +81,7 @@
   register: code_checkout
   when: item.PROTOCOL == "https" and GIT_REPOS is defined
   with_items: "{{ GIT_REPOS }}"
-  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
+  #  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
   tags:
     - install
     - install:code
@@ -92,7 +92,7 @@
     state: absent
   when: item.PROTOCOL == "ssh" and GIT_REPOS is defined
   with_items: "{{ GIT_REPOS }}"
-  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
+  #  no_log: "{{ GIT_CLONE_NO_LOGGING }}"
   tags:
     - install
     - install:code
