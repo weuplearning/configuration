@@ -242,7 +242,6 @@ REGISTRAR_NGINX_PORT: 80
 REGISTRAR_SSL_NGINX_PORT: 443
 REGISTRAR_VERSION: $registrar_version
 REGISTRAR_ENABLED: $registrar
-REGISTRAR_SANDBOX_BUILD: True
 
 LEARNER_PORTAL_NGINX_PORT: 80
 LEARNER_PORTAL_SSL_NGINX_PORT: 443
@@ -460,25 +459,16 @@ for play in $plays; do
     deploy[$play]=${!play}
 done
 
-# If reconfigure was selected or if starting from an ubuntu 16.04 AMI
-# run non-deploy tasks for all plays
-if [[ $reconfigure == "true" || $server_type == "full_edx_installation_from_scratch" ]]; then
-    cat $extra_vars_file
-    run_ansible edx_continuous_integration.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
-fi
-
-if [[ $reconfigure != "true" && $server_type == "full_edx_installation" ]]; then
-    # Run deploy tasks for the plays selected
-    for i in $plays; do
-        if [[ ${deploy[$i]} == "true" ]]; then
-            cat $extra_vars_file
-            run_ansible ${i}.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
-            if [[ ${i} == "edxapp" ]]; then
-                run_ansible worker.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
-            fi
+# Run deploy tasks for the plays selected
+for i in $plays; do
+    if [[ ${deploy[$i]} == "true" ]]; then
+        cat $extra_vars_file
+        run_ansible ${i}.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
+        if [[ ${i} == "edxapp" ]]; then
+            run_ansible worker.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
         fi
-    done
-fi
+    fi
+done
 
 # deploy the edx_ansible play
 run_ansible edx_ansible.yml -i "${deploy_host}," $extra_var_arg --user ubuntu
