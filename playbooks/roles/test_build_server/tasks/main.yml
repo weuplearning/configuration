@@ -22,7 +22,7 @@
 
 - name: Create clone of edx-platform
   git:
-    repo: "https://github.com/edx/edx-platform.git"
+    repo: "https://github.com/weuplearning/edx-platform.git"
     dest: "{{ test_build_server_repo_path }}/edx-platform-clone"
     version: "{{ test_edx_platform_version }}"
   become_user: "{{ test_build_server_user }}"
