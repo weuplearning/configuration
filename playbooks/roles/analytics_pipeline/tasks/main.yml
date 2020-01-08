@@ -2,10 +2,10 @@
 #
 # edX Configuration
 #
-# github:     https://github.com/edx/configuration
+# github:     https://github.com/weuplearning/configuration
 # wiki:       https://openedx.atlassian.net/wiki/display/OpenOPS
 # code style: https://openedx.atlassian.net/wiki/display/OpenOPS/Ansible+Code+Conventions
-# license:    https://github.com/edx/configuration/blob/master/LICENSE.TXT
+# license:    https://github.com/weuplearning/configuration/blob/master/LICENSE.TXT
 #
 #
 #
@@ -14,7 +14,7 @@
 # Overview:
 #
 # Prepare the machine to run the edX Analytics Data Pipeline. The pipeline currently "installs itself"
-# via an ansible playbook that is not included in the edx/configuration repo. However, in order to
+# via an ansible playbook that is not included in the weuplearning/configuration repo. However, in order to
 # run the pipeline in a devstack environment, some configuration needs to be performed. In a production
 # environment many of these config files are stored on S3.
 #

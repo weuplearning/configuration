@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 LABEL maintainer="edxops" 
 ENV ANSIBLE_REPO="https://github.com/edx/ansible"
-ENV CONFIGURATION_REPO="https://github.com/edx/configuration.git"
+ENV CONFIGURATION_REPO="https://github.com/weuplearning/configuration.git"
 ENV CONFIGURATION_VERSION="master"
 
 ADD util/install/ansible-bootstrap.sh /tmp/ansible-bootstrap.sh
