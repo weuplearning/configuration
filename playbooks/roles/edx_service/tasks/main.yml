@@ -161,11 +161,11 @@
     - install
     - install:system-requirements
 
-- name: Get instance information
-  action: ec2_metadata_facts
-  when: AWS_GATHER_FACTS
-  tags:
-    - to-remove
+#- name: Get instance information
+#  action: ec2_metadata_facts
+#  when: AWS_GATHER_FACTS
+#  tags:
+#    - to-remove
 
 - name: Tag instance
   ec2_tag_local:

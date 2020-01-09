@@ -37,8 +37,8 @@
   roles:
     - role: swapfile
       SWAPFILE_SIZE: 4GB
-    - role: aws
-      when: COMMON_ENABLE_AWS_ROLE
+    #- role: aws
+    #  when: COMMON_ENABLE_AWS_ROLE
     - role: nginx
       nginx_sites:
       - cms
@@ -66,14 +66,14 @@
     - role: ecomworker
       ECOMMERCE_WORKER_BROKER_HOST: 127.0.0.1
       when: SANDBOX_ENABLE_ECOMMERCE
-    - role: analytics_api
-      when: SANDBOX_ENABLE_ANALYTICS_API
-    - role: insights
-      when: SANDBOX_ENABLE_INSIGHTS
-    - role: edx_notes_api
-      when: SANDBOX_ENABLE_NOTES
-      # Run the nginx role to install edx_notes_api config since the app role
-      # currently doesn't do that.
+    #- role: analytics_api
+    #  when: SANDBOX_ENABLE_ANALYTICS_API
+    #- role: insights
+    #  when: SANDBOX_ENABLE_INSIGHTS
+    #- role: edx_notes_api
+    #  when: SANDBOX_ENABLE_NOTES
+    #  # Run the nginx role to install edx_notes_api config since the app role
+    #  # currently doesn't do that.
     - role: nginx
       nginx_sites:
       - edx_notes_api
@@ -92,13 +92,13 @@
     - role: xqueue
       update_users: True
     - edx_ansible
-    - role: datadog
-      when: COMMON_ENABLE_DATADOG
-    - role: splunkforwarder
-      when: COMMON_ENABLE_SPLUNKFORWARDER
+    #- role: datadog
+    #  when: COMMON_ENABLE_DATADOG
+    #- role: splunkforwarder
+    #  when: COMMON_ENABLE_SPLUNKFORWARDER
     - role: postfix_queue
       when: POSTFIX_QUEUE_EXTERNAL_SMTP_HOST != ''
-    - role: datadog-uninstall
-      when: not COMMON_ENABLE_DATADOG
+    #- role: datadog-uninstall
+    #  when: not COMMON_ENABLE_DATADOG
     - role: user_retirement_pipeline
       when: COMMON_RETIREMENT_SERVICE_SETUP
