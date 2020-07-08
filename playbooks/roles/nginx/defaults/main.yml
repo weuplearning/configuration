@@ -26,6 +26,8 @@ NGINX_USERS:
 
 # Override these vars for adding user to nginx.htpasswd
 # for prospectus preview basic auth
+PROSPECTUS_PREVIEW_HTPASSWD_USER: "{{ COMMON_HTPASSWD_USER }}"
+PROSPECTUS_PREVIEW_HTPASSWD_PASS: "{{ COMMON_HTPASSWD_PASS }}"
 PROSPECTUS_PREVIEW_NGINX_USERS:
   - name: "{{ PROSPECTUS_PREVIEW_HTPASSWD_USER }}"
     password: "{{ PROSPECTUS_PREVIEW_HTPASSWD_PASS }}"
@@ -49,8 +51,8 @@ NGINX_HTTPS_REDIRECT_STRATEGY: "scheme"
 
 NGINX_SSL_CERTIFICATE: 'ssl-cert-snakeoil.pem'
 NGINX_SSL_KEY: 'ssl-cert-snakeoil.key'
-NGINX_SSL_CIPHERS: "'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA'"
-NGINX_SSL_PROTOCOLS: "TLSv1 TLSv1.1 TLSv1.2"
+NGINX_SSL_CIPHERS: "'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA'"
+NGINX_SSL_PROTOCOLS: "TLSv1.1 TLSv1.2"
 NGINX_DH_PARAMS_PATH: "/etc/ssl/private/dhparams.pem"
 NGINX_DH_KEYSIZE: 2048
 
@@ -87,7 +89,7 @@ NGINX_SERVER_HTML_FILES:
   - file: rate-limit.html
     lang: "{{ NGINX_SERVER_ERROR_LANG }}"
     title: 'Rate limit exceeded'
-    msg: 'If think you have encountered this message in error please let us know at <a href="mailto:{{ EDXAPP_TECH_SUPPORT_EMAIL|default("technical@example.com") }}">{{ EDXAPP_TECH_SUPPORT_EMAIL|default("technical@example.com") }}</a>'
+    msg: 'We are aware of the error and are working to find a resolution.'
     img: "{{ NGINX_SERVER_ERROR_IMG }}"
     img_alt: "{{ NGINX_SERVER_ERROR_IMG_ALT }}"
     heading: 'Uh oh, we are having some server issues..'
@@ -98,7 +100,7 @@ NGINX_SERVER_HTML_FILES:
   - file: server-error.html
     lang: "{{ NGINX_SERVER_ERROR_LANG }}"
     title: 'Server error'
-    msg: 'We have been notified of the error, if it persists please let us know at <a href="mailto:{{ EDXAPP_TECH_SUPPORT_EMAIL|default("technical@example.com") }}">{{ EDXAPP_TECH_SUPPORT_EMAIL|default("technical@example.com") }}</a>'
+    msg: 'We are aware of the error and are working to find a resolution.'
     img: "{{ NGINX_SERVER_ERROR_IMG }}"
     img_alt: "{{ NGINX_SERVER_ERROR_IMG_ALT }}"
     heading: 'Uh oh, we are having some server issues..'

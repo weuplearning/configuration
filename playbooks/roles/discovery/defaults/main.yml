@@ -25,6 +25,7 @@ DISCOVERY_MYSQL: 'localhost'
 DISCOVERY_MYSQL_USER: 'discov001'
 DISCOVERY_MYSQL_PASSWORD: 'password'
 DISCOVERY_MYSQL_REPLICA_HOST: 'localhost'
+DISCOVERY_MYSQL_CONN_MAX_AGE: 60
 
 discovery_environment:
   DISCOVERY_CFG: "{{ COMMON_CFG_DIR }}/{{ discovery_service_name }}.yml"
@@ -33,7 +34,8 @@ discovery_user: "{{ discovery_service_name }}"
 discovery_home: "{{ COMMON_APP_DIR }}/{{ discovery_service_name }}"
 discovery_code_dir: "{{ discovery_home }}/{{ discovery_service_name }}"
 
-discovery_node_version: '12.11.1'
+DISCOVERY_NODE_VERSION: '12.11.1'
+discovery_node_version: "{{ DISCOVERY_NODE_VERSION }}"
 
 #
 # OS packages

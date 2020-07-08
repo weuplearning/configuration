@@ -20,7 +20,7 @@ EDXAPP_LMS_BASE_SCHEME: http
 COMMON_SECURITY_UPDATES: true
 SECURITY_UPGRADE_ON_ANSIBLE: true
 
-EDXAPP_INSTALL_PRIVATE_REQUIREMENTS: true
+EDXAPP_INSTALL_PRIVATE_REQUIREMENTS: false
 
 EDXAPP_SEARCH_HOST: 'edx.devstack.elasticsearch'
 
@@ -34,8 +34,6 @@ edxapp_environment_extra:
   SELENIUM_BROWSER: 'firefox'
   SELENIUM_HOST: 'edx.devstack.firefox'
   SELENIUM_PORT: '4444'
-  LMS_CFG: "/edx/app/edxapp/edx-platform/lms/envs/lms.yml"
-  STUDIO_CFG: "/edx/app/edxapp/edx-platform/cms/envs/studio.yml"
 
 EDXAPP_XQUEUE_URL: 'http://edx.devstack.xqueue:18040'
 
