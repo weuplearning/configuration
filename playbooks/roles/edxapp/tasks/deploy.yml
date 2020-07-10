@@ -39,7 +39,7 @@
   git:
     dest: "{{ edxapp_code_dir }}"
     repo: "{{ edx_platform_repo }}"
-    version: "{{ edx_platform_version }}"
+    version: "atp_juniper"
     accept_hostkey: yes
     key_file: "{% if EDXAPP_USE_GIT_IDENTITY %}{{ edxapp_git_identity }}{% endif %}"
   become_user: "{{ edxapp_user }}"
