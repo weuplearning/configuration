@@ -161,6 +161,12 @@ cd /var/tmp/configuration
 sudo -H pip install -r requirements.txt
 
 ##
+## Make sure SSL certs are there
+##
+sudo apt-get install ssl-cert -y
+sudo make-ssl-cert generate-default-snakeoil --force-overwrite
+
+##
 ## Run the openedx_native.yml playbook in the configuration/playbooks directory
 ##
 cd /var/tmp/configuration/playbooks && sudo -E ansible-playbook -c local ./app_server.yml -i "localhost," $EXTRA_VARS "$@"
