@@ -144,6 +144,7 @@ fi
 EXTRA_VARS="-e@$(pwd)/config.yml $EXTRA_VARS"
 
 CONFIGURATION_VERSION=${CONFIGURATION_VERSION-$OPENEDX_RELEASE}
+edx_platform_version="atp_juniper"
 
 ##
 ## Clone the configuration repository and run Ansible
