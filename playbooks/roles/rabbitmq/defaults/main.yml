@@ -64,7 +64,7 @@ rabbitmq_mnesia_folder: "{{ rabbitmq_cookie_dir }}/mnesia"
 
 rabbitmq_port: 5672
 rabbitmq_management_port: 15672
-rabbitmq_ip: "{{ ansible_default_ipv4.address }}"
+rabbitmq_ip: "{{ ATP_REMOTE_IP_PERSISTANCE }}"
 
 # Structure for auth config file.
 rabbitmq_auth_config:
