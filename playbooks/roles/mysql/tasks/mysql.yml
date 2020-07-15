@@ -45,6 +45,13 @@
     regexp: '^bind-address\s+=\s+127\.0\.0\.1$'
     state: absent
 
+- name: ensure /etc/mysql/conf.d exists
+  file:
+    path: /etc/mysql/conf.d
+    state: directory
+    group: root
+    owner: root
+
 - name: Set default character sets and collations
   template:
     src: default_character_sets_and_collations.cnf.j2
