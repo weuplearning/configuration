@@ -39,6 +39,12 @@
     install_recommends: yes
     state: present
 
+- name: remove bind-address
+  lineinfile:
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address\s+=\s+127\.0\.0\.1$'
+    state: absent
+
 - name: Set default character sets and collations
   template:
     src: default_character_sets_and_collations.cnf.j2
