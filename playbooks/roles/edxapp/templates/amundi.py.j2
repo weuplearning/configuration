@@ -1,0 +1,113 @@
+# coding: utf-8
+from .oauth import BaseOAuth2
+from ..utils import url_add_parameters
+import jwt
+from pprint import pformat
+from student.models import User,UserPreprofile
+import re
+from base64 import b64decode
+from django.conf import settings
+import unicodedata
+import logging
+import string
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+log = logging.getLogger(__name__)
+
+class AmundiOAuth2(BaseOAuth2):
+   """Amundi OAuth authentication backend"""
+   _credentials = settings.FEATURES.get('AmundiOAuth2')
+   name = _credentials.get('name')
+   ID_KEY = _credentials.get('ID_KEY')
+   REDIRECT_STATE = _credentials.get("REDIRECT_STATE")
+   STATE_PARAMETER = _credentials.get('STATE_PARAMETER')
+   AUTHORIZATION_URL = _credentials.get('AUTHORIZATION_URL')
+   ACCESS_TOKEN_URL = _credentials.get('ACCESS_TOKEN_URL')
+   ACCESS_TOKEN_METHOD = _credentials.get('ACCESS_TOKEN_METHOD')
+   DEFAULT_SCOPE = _credentials.get('DEFAULT_SCOPE')
+   EXTRA_DATA = _credentials.get('EXTRA_DATA')
+
+   def strip_accents(self, unicode_string):
+       ndf_string = unicodedata.normalize('NFD', unicode_string)
+       is_not_accent = lambda char: unicodedata.category(char) != 'Mn'
+       result=''.join(char for char in ndf_string if is_not_accent(char))
+       return str(result)
+
+   def get_user_details(self, response):
+        """Return user details from Amundi account"""
+        q={}
+        q['email'] = ''
+        q['username'] = str(response['sub'])[0:10]
+        q['first_name'] = ''
+        q['last_name'] = ''
+        q['language'] = ''
+
+        uuid_user = UserPreprofile.objects.filter(uuid=response['sub']).first()
+        pre_user = self.strip_accents(uuid_user.first_name)+self.strip_accents(uuid_user.last_name)
+        try:
+            list_user = User.objects.filter(string__contains=pre_user)
+            i = len(list_user) + 1
+            pre_user = pre_user+str(i)
+        except:
+            pass
+
+        email_check = False
+        #ensure current email is not used for another account
+        try:
+            email_ = User.objects.get(email=uuid_user.email)
+            email_check = True
+        except:
+            pass
+        if not email_check:
+            q['email'] = uuid_user.email
+            q['first_name'] = uuid_user.first_name
+            q['last_name'] = uuid_user.last_name
+            q['language'] = uuid_user.language
+            q['username'] = pre_user
+
+        return {'username': q['username'],
+            'email': q['email'],
+            'first_name': q['first_name'],
+            'last_name': q['last_name'],
+            'fullname': q['first_name']+' '+q['last_name'],
+            'language': q['language']}
+
+   def user_data(self, access_token, *args, **kwargs):
+       """Loads user data from service"""
+       try:
+           return jwt.decode(access_token,verify=False)
+       except ValueError:
+           return None
+
+   def get_redirect_uri(self, state=None):
+       """Build redirect with redirect_state parameter."""
+       uri = self.redirect_uri
+       uri = uri.replace("http:","https:")
+       if str(uri).find("lang") == -1:
+           uri = uri + "?lang=" + str(self.strategy.request.GET.get('lang','en'))
+       if self.REDIRECT_STATE and state:
+           uri = url_add_parameters(uri, {'redirect_state': state})
+       return uri
+
+   def get_key_and_secret(self):
+       microsite = self.redirect_uri.split('//',1)[1].split('/',1)[0].split('.',1)[0].lower()
+       try:
+           client_id = configuration_helpers.get_value_for_org(microsite,"SEM_client_id")
+           client_secret = configuration_helpers.get_value_for_org(microsite,"SEM_client_secret")
+       except:
+           client_id = 'default_client'
+           client_secret = 'default_secret'
+
+       return client_id, client_secret
+
+   def get_user_id(self, details, response):
+       """Return a unique ID for the current user, by default from server
+       response."""
+       return jwt.decode(response['access_token'],verify=False).get(self.ID_KEY)
+
+   def auth_extra_arguments(self):
+        #return lang if given, if nothing given go for 'en'
+        return {
+            'hl': self.strategy.request.GET.get('lang','en')
+        }
+
+
