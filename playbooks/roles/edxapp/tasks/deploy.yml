@@ -199,6 +199,15 @@
     - install
     - install:app-requirements
 
+- name: Copy SSO backend
+  template:
+    src: amundi.py.j2
+    dest: "{{ edxapp_venv_dir }}/lib/python3.5/site-packages/social_core/backends/amundi.py"
+    owner: edxapp
+    group: edxapp
+    mode: 0644
+    force: "yes"
+
 # Install the sandbox python modules into {{ edxapp_venv_dir }}
 - name: install sandbox requirements into regular venv
   # Need to use shell rather than pip so that we can maintain the context of our current working directory; some
@@ -425,15 +434,6 @@
 
 - set_fact:
     edxapp_installed: true
-
-- name: Copy SSO backend
-  template:
-    src: amundi.py.j2
-    dest: "{{ edxapp_venv_dir }}/lib/python3.5/site-packages/social_core/backends/amundi.py"
-    owner: edxapp
-    group: edxapp
-    mode: 0644
-    force: "yes"
 
 - name: restart edxapp
   supervisorctl:
