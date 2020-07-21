@@ -9,8 +9,11 @@
     - install
     - install:memcache
 
-- name : allow memcache from remote
+- name : allow memcached from remote
   replace:
     path: /etc/memcached.conf
     regexp: '^\-l 127\.0\.0\.1'
     replace: '-l 0.0.0.0'
+
+- name: restart memcached
+  command: service memcached restart
