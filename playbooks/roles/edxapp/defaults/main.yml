@@ -310,6 +310,20 @@ EDXAPP_FEATURES:
   SHOW_HEADER_LANGUAGE_SELECTOR: "{{ EDXAPP_SHOW_HEADER_LANGUAGE_SELECTOR }}"
   SHOW_FOOTER_LANGUAGE_SELECTOR: "{{ EDXAPP_SHOW_FOOTER_LANGUAGE_SELECTOR }}"
   ENABLE_ENROLLMENT_RESET: false
+  AmundiOAuth2:
+      name: amundi
+      ID_KEY: sub
+      REDIRECT_STATE: false
+      STATE_PARAMETER: true
+      AUTHORIZATION_URL: {{ SEM_AUTHORIZE_ENDPOINT }} 
+      ACCESS_TOKEN_URL: {{ SEM_TOKEN_ENDPOINT }}
+      ACCESS_TOKEN_METHOD: POST
+      DEFAULT_SCOPE:
+      EXTRA_DATA:
+      - - id
+        - id
+      - - expires
+        - expires
 
 # This needs to be set to localhost
 # if xqueue is run on the same server
