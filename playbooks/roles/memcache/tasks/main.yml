@@ -13,4 +13,4 @@
   replace:
     path: /etc/memcached.conf
     regexp: '^\-l 127\.0\.0\.1'
-    line: '-l 0.0.0.0'
+    replace: '-l 0.0.0.0'
