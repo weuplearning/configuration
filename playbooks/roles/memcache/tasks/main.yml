@@ -10,6 +10,7 @@
     - install:memcache
 
 - name : allow memcache from remote
+  replace:
     path: /etc/memcached.conf
     regexp: '^\-l 127\.0\.0\.1'
     line: '-l 0.0.0.0'
