@@ -208,6 +208,12 @@
     mode: 0644
     force: "yes"
 
+- name: Copy custom CSS files for CMS
+  command: sudo -E -H -u edxapp tar --skip-old-files -xvf /edx/app/edxapp/edx-platform/cms/static/css.tar.gz --directory /edx/var/edxapp/staticfiles/studio
+
+- name: Copy custom CSS files for LMS
+  command: sudo -E -H -u edxapp tar --skip-old-files -xvf /edx/app/edxapp/edx-platform/cms/static/css.tar.gz --directory /edx/var/edxapp/staticfiles
+
 # Install the sandbox python modules into {{ edxapp_venv_dir }}
 - name: install sandbox requirements into regular venv
   # Need to use shell rather than pip so that we can maintain the context of our current working directory; some
