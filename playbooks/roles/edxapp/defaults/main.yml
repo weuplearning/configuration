@@ -692,7 +692,7 @@ EDXAPP_CORS_ORIGIN_WHITELIST: []
 EDXAPP_CORS_ORIGIN_ALLOW_ALL: false
 EDXAPP_CROSS_DOMAIN_CSRF_COOKIE_DOMAIN: ""
 EDXAPP_CROSS_DOMAIN_CSRF_COOKIE_NAME: ""
-EDXAPP_CSRF_COOKIE_SECURE: false
+EDXAPP_CSRF_COOKIE_SECURE: true
 EDXAPP_CSRF_TRUSTED_ORIGINS: []
 EDXAPP_LOGIN_REDIRECT_WHITELIST: []
 
@@ -852,7 +852,7 @@ EDXAPP_SOCIAL_AUTH_SAML_SP_PUBLIC_CERT_DICT: {}
 # Only set this to true for client side profiling, never for production
 EDXAPP_SESSION_SAVE_EVERY_REQUEST: false
 
-EDXAPP_SESSION_COOKIE_SECURE: false
+EDXAPP_SESSION_COOKIE_SECURE: true
 
 # Optionally add a cron job to run the "clearsessions" management command to delete expired sessions
 # Hours and minutes follow cron syntax.
