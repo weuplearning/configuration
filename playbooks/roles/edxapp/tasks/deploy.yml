@@ -208,6 +208,16 @@
     mode: 0644
     force: "yes"
 
+- name: create studio static file dir
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ edxapp_user }}"
+    group: "{{ common_web_group }}"
+    mode: "{{ item.mode | default(0755) }}"
+  with_items:
+    - { path: "{{ edxapp_staticfile_dir }}/studio" }
+    
 - name: Copy custom CSS files for CMS
   command: sudo -E -H -u edxapp tar --skip-old-files -xvf /edx/app/edxapp/edx-platform/cms/static/css.tar.gz --directory /edx/var/edxapp/staticfiles/studio
 
