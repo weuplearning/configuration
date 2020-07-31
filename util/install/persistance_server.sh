@@ -151,7 +151,7 @@ CONFIGURATION_VERSION=${CONFIGURATION_VERSION-$OPENEDX_RELEASE}
 cd /var/tmp
 git clone https://github.com/weuplearning/configuration
 cd configuration
-git checkout atp_juniper
+git checkout wul_master
 git pull
 
 ##

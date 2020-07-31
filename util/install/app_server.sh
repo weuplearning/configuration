@@ -144,7 +144,7 @@ fi
 EXTRA_VARS="-e@$(pwd)/config.yml $EXTRA_VARS"
 
 CONFIGURATION_VERSION=${CONFIGURATION_VERSION-$OPENEDX_RELEASE}
-edx_platform_version="atp_juniper"
+edx_platform_version="wul_master"
 
 ##
 ## Clone the configuration repository and run Ansible
@@ -152,7 +152,7 @@ edx_platform_version="atp_juniper"
 cd /var/tmp
 git clone https://github.com/weuplearning/configuration
 cd configuration
-git checkout atp_juniper
+git checkout wul_master
 git pull
 
 ##
