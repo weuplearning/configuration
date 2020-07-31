@@ -41,8 +41,8 @@
     EDXAPP_ENABLE_MEMCACHE: true
     EDXAPP_ENABLE_ELASTIC_SEARCH: true
   roles:
-    - role: swapfile
-      SWAPFILE_SIZE: 4GB
+    #- role: swapfile
+    #  SWAPFILE_SIZE: 4GB
     - role: aws
       when: COMMON_ENABLE_AWS_ROLE
     #- role: nginx
