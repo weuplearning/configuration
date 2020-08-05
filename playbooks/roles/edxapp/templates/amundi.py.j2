@@ -57,10 +57,10 @@ class AmundiOAuth2(BaseOAuth2):
             email_check = True
         except:
             pass
+        q['first_name'] = uuid_user.first_name
+        q['last_name'] = uuid_user.last_name
         if not email_check:
             q['email'] = uuid_user.email
-            q['first_name'] = uuid_user.first_name
-            q['last_name'] = uuid_user.last_name
             q['language'] = uuid_user.language
             q['username'] = pre_user
 
