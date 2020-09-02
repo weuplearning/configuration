@@ -208,6 +208,15 @@
     mode: 0644
     force: "yes"
 
+- name: Copy admin template for import export usersocialauth
+  template:
+    src: social-auth-app-django.social_django.admin.py.j2
+    dest: "{{ edxapp_venv_dir }}/src/social-auth-app-django/social_django/admin.py"
+    owner: edxapp
+    group: edxapp
+    mode: 0644
+    force: "yes"
+    
 - name: create studio static file dir
   file:
     path: "{{ item.path }}"
